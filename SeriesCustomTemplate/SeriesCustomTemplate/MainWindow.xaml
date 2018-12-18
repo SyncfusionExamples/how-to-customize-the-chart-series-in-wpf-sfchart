@@ -1,0 +1,217 @@
+﻿<Window x:Class="SeriesCustomTemplate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SeriesCustomTemplate"
+        xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="670" Width="1250">
+
+    <Grid Margin="10">
+
+        <Grid.DataContext>
+            <local:ViewModel/>
+        </Grid.DataContext>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <chart:SfChart x:Name="chart1" Grid.Row="0" Grid.Column="0" Margin="5"  Header="Bar Series">
+
+            <chart:SfChart.Resources>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="seriesTemplate">
+                        <Canvas>
+                            <Border Background="{Binding Interior}" Canvas.Left="{Binding RectX}" Canvas.Top="{Binding RectY}" Width="{Binding Width}" Height="{Binding Height}" BorderThickness="3" BorderBrush="Blue" CornerRadius="0,10,10,0" />
+                        </Canvas>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </chart:SfChart.Resources>
+
+            <chart:SfChart.PrimaryAxis>
+                <chart:CategoryAxis >
+                </chart:CategoryAxis>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis >
+                </chart:NumericalAxis>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:BarSeries XBindingPath="XValue" YBindingPath="YValue" Interior="Blue"
+                             ItemsSource="{Binding ColumnData}" CustomTemplate="{StaticResource seriesTemplate}">
+            </chart:BarSeries>
+
+        </chart:SfChart>
+
+
+        <chart:SfChart x:Name="chart2" Grid.Row="0" Grid.Column="1" Margin="5" Header="Bubble Series">
+            <chart:SfChart.Resources>
+                <ResourceDictionary>
+                    <local:BubbleInteriorConverter x:Key="colorConverter"/>
+                    <local:BubbleAngleConverter x:Key="angleConverter"/>
+                    <DataTemplate x:Key="seriesTemplate" >
+                        <Canvas>
+                            <Path Fill="{Binding Converter={StaticResource colorConverter}}" 
+                                  Stretch="Fill" Height="30" Width="30" RenderTransformOrigin="0.5,0.5" 
+                                  Canvas.Left="{Binding RectX}" Canvas.Top="{Binding RectY}" 
+                                  Data="M20.125,32L0.5,12.375L10.3125,12.375L10.3125,0.5L29.9375,0.5L29.9375,12.375L39.75,12.375z">
+                                <Path.RenderTransform>
+                                    <RotateTransform Angle="{Binding Converter={StaticResource angleConverter}}"/>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Canvas>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </chart:SfChart.Resources>
+
+            <chart:SfChart.PrimaryAxis>
+                <chart:CategoryAxis PlotOffset="20">
+                </chart:CategoryAxis>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis >
+                </chart:NumericalAxis>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:BubbleSeries XBindingPath="XValue" YBindingPath="Count" 
+                                 ItemsSource="{Binding Data}" Size="Size" 
+                                 CustomTemplate="{StaticResource seriesTemplate}">
+            </chart:BubbleSeries>
+        </chart:SfChart>
+
+        <chart:SfChart x:Name="chart3" Grid.Row="0" Grid.Column="2" Margin="5" Header="Column Series" >
+            <chart:SfChart.Resources>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="seriesTemplate">
+                        <Canvas>
+                            <Border Background="{Binding Interior}" Canvas.Left="{Binding RectX}" Canvas.Top="{Binding RectY}" Width="{Binding Width}" Height="{Binding Height}" BorderThickness="0,4,0,0" BorderBrush="Red"/>
+                        </Canvas>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </chart:SfChart.Resources>
+
+            <chart:SfChart.PrimaryAxis>
+                <chart:CategoryAxis >
+                </chart:CategoryAxis>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis >
+                </chart:NumericalAxis>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:ColumnSeries XBindingPath="XValue" YBindingPath="YValue"
+                                ItemsSource="{Binding ColumnData}" CustomTemplate="{StaticResource seriesTemplate}">
+            </chart:ColumnSeries>
+
+        </chart:SfChart>
+
+        <chart:SfChart x:Name="chart4" Grid.Row="1" Grid.Column="0" Margin="5" Header="Scatter Series" >
+            <chart:SfChart.Resources>
+                <ResourceDictionary>
+                    <local:ScatterInteriorConverter x:Key="colorConverter"/>
+                    <local:ScatterAngleConverter x:Key="angleConverter"/>
+                    <DataTemplate x:Key="seriesTemplate" >
+                        <Canvas>
+                            <Path Fill="{Binding Converter={StaticResource colorConverter}}" 
+                                  Stretch="Fill" Height="30" Width="30" RenderTransformOrigin="0.5,0.5"
+                                  Canvas.Left="{Binding RectX}" Canvas.Top="{Binding RectY}"
+                                  Data="M20.125,32L0.5,12.375L10.3125,12.375L10.3125,
+                                  0.5L29.9375,0.5L29.9375,12.375L39.75,12.375z">
+                                <Path.RenderTransform>
+                                    <RotateTransform Angle="{Binding Converter={StaticResource angleConverter}}"/>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Canvas>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </chart:SfChart.Resources>
+
+            <chart:SfChart.PrimaryAxis>
+                <chart:CategoryAxis PlotOffset="20">
+                </chart:CategoryAxis>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis >
+                </chart:NumericalAxis>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:ScatterSeries XBindingPath="XValue" YBindingPath="Count" 
+                                 ItemsSource="{Binding Data}"  
+                                 CustomTemplate="{StaticResource seriesTemplate}">
+            </chart:ScatterSeries>
+        </chart:SfChart>
+
+        <chart:SfChart x:Name="chart5" Grid.Row="1" Grid.Column="1" Margin="5" Header="Line Series">
+            <chart:SfChart.Resources>
+                <ResourceDictionary>
+                    <local:SplineColorConverter x:Key="colorConverter"/>
+                    <DataTemplate x:Key="seriesTemplate">
+                        <Canvas>
+                            <Line X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}" 
+                                  Stroke="{Binding Converter={StaticResource colorConverter}}"
+                                  StrokeThickness="2" StrokeDashArray="2,3"></Line>
+                        </Canvas>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </chart:SfChart.Resources>
+
+            <chart:SfChart.PrimaryAxis>
+                <chart:CategoryAxis>
+                </chart:CategoryAxis>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis >
+                </chart:NumericalAxis>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:LineSeries XBindingPath="XValue" YBindingPath="Count" 
+                              ItemsSource="{Binding Data}" CustomTemplate="{StaticResource seriesTemplate}" >
+            </chart:LineSeries>
+        </chart:SfChart>
+
+        <chart:SfChart x:Name="chart6" Grid.Row="1" Grid.Column="2" Margin="5" Header="StepLine Series">
+            <chart:SfChart.Resources>
+                <ResourceDictionary>
+                    <local:StepLineInteriorConverter x:Key="colorConverter"/>
+                    <local:StepLineDashesConverter x:Key="dashesConverter"/>
+                    <DataTemplate x:Key="seriesTemplate" >
+                        <Canvas>
+                            <Polyline Points="{Binding Points}" StrokeDashArray="{Binding Converter={StaticResource dashesConverter}}"
+                                      StrokeThickness="{Binding StrokeThickness}"
+                                     Stroke="{Binding Converter={StaticResource colorConverter}}"/>
+                        </Canvas>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </chart:SfChart.Resources>
+
+            <chart:SfChart.PrimaryAxis>
+                <chart:CategoryAxis PlotOffset="30"  EdgeLabelsVisibilityMode="AlwaysVisible" Interval="2" EdgeLabelsDrawingMode="Shift">
+                </chart:CategoryAxis>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis ></chart:NumericalAxis>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:StepLineSeries XBindingPath="XValue" YBindingPath="YValue" 
+                                 ItemsSource="{Binding StepLineData}" 
+                                 CustomTemplate="{StaticResource seriesTemplate}">
+            </chart:StepLineSeries>
+        </chart:SfChart>
+    </Grid>
+
+</Window>
