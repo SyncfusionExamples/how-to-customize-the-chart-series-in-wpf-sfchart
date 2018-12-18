@@ -1,4 +1,4 @@
-# how-to-customize-the-chart-series-in-wpf-sfchart
+# How to customize the chart series in WPF SfChart
 This example demonstrates how to customize the chart series in WPF platform using the data template.
 
 For more details please refer the WPF UG documentation link for [series customization](https://help.syncfusion.com/wpf/sfchart/styling-and-customization#customize-series).
