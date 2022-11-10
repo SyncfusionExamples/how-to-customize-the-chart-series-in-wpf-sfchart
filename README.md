@@ -5,7 +5,7 @@ For more details please refer the WPF UG documentation link for [series customiz
 
 ## <a name="requirements-to-run-the-demo"></a>Requirements to run the demo ##
 
-* [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/)
+* Minimum [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/)
 
 ## <a name="troubleshooting"></a>Troubleshooting ##
 ### Path too long exception
